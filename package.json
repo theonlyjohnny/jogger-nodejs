@@ -1,0 +1,24 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "logger.js",
+  "scripts": {
+    "test": "node ./test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theonlyjohnny/logger.git"
+  },
+  "author": "Johnny Dallas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theonlyjohnny/logger/issues"
+  },
+  "homepage": "https://github.com/theonlyjohnny/logger#readme",
+  "dependencies": {
+    "continuation-local-storage": "^3.2.0",
+    "lodash": "^4.17.4",
+    "winston": "^2.3.1"
+  }
+}
