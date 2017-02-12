@@ -1,7 +1,7 @@
 const os = require('os'),
   winston = require('winston'),
   path = require('path'),
-  PROJECT_ROOT = path.join(__dirname, '.'),
+  PROJECT_ROOT = path.join(__dirname, '../..'),
   _ = require('lodash'),
   util = require('util'),
   localStorage = require('continuation-local-storage'),
