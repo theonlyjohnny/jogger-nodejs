@@ -7,9 +7,19 @@ const os = require('os'),
   localStorage = require('continuation-local-storage'),
   mdx = localStorage.createNamespace('mdx');
 
+const levels = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  verbose: 3,
+  debug: 4,
+  silly: 5
+}
+
+
 class Logger {
 
-  constructor() {
+  constructor(transports) {
     this.logger = new winston.Logger();
     this._log = this._log.bind(this);
 
@@ -28,11 +38,29 @@ class Logger {
     this.info = this.info.bind(this);
 
     this.logger.add(winston.transports.Console, {
-      level: 'debug',
+      level: 'verbose',
       colorize: true,
       timestamp: true,
       exitOnError: false
     });
+
+    this.transports = ['Console'];
+
+    if (transports && typeof transports === 'object' && transports.map) {
+      transports.forEach((transport) => {
+        if ((!transport.type || !transport.data) || (typeof transport.type !== 'string' || typeof transport.data !== 'object')) {
+          return;
+        }
+        if (winston.transports[transport.type]) {
+          this.logger.add(winston.transports[transport.type], transport.data);
+          this.transports.push(transport.type);
+        } else {
+          this.warn(`Failed to apply transport -- ${JSON.stringify(transport)}`);
+        }
+      })
+    }
+
+    this.log(`Logger instantiated with following methods: ${this.transports.join(", ")}`)
   }
 
   _log() {
@@ -61,6 +89,14 @@ class Logger {
 
   debug() {
     this._log("debug", arguments);
+  }
+
+  verbose() {
+    this._log("verbose", arguments);
+  }
+
+  silly() {
+    this._log("silly", arguments);
   }
 
   setupLogger(req, res, next) {
@@ -134,4 +170,4 @@ module.exports.getMdx = function() {
   return mdx;
 }
 
-module.exports = new Logger();
+module.exports = Logger;
