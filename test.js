@@ -1,14 +1,5 @@
-const addLogMethods = [{
-  type: 'Console',
-  data: {
-    level: 'silly',
-    colorize: true,
-    name: 'console2',
-    timestamp: true
-  }
-}]
 
-const logger = new(require("./logger.js"))(addLogMethods);
+const logger = new(require("./logger.js"))(null, {level: 'debug', colorize: true, timestamp: true});
 
 logger.err("err");
 logger.error("error");
@@ -19,9 +10,8 @@ logger.warning("warning");
 logger.info("info");
 logger.log("log");
 
-logger.verbose("verbose");
+logger.alert("alert");
 
-logger.debug("debug");
-logger.trace("trace");
+logger.emerg("emerg");
 
-logger.silly("silly");
+logger.crit("crit");

@@ -17,8 +17,7 @@
   },
   "homepage": "https://github.com/theonlyjohnny/logger#readme",
   "dependencies": {
-    "continuation-local-storage": "^3.2.0",
-    "lodash": "^4.17.4",
-    "winston": "^2.3.1"
+    "ain2": "git+ssh://git@github.com:bebo/ain.git",
+    "chalk": "^2.1.0"
   }
 }
